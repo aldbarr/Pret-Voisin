@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#24483F"><meta name="description" content="Prêt’Voisin — plateforme locale de prêt et de dons gratuits entre voisins."><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="robots" content="noindex,nofollow"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="Prêt’Voisin"><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icons/icon-192.png"><link rel="icon" type="image/png" href="icons/icon-192.png"><title>Prêt’Voisin</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <a class="brand" href="#" aria-label="Prêt’Voisin">
+      <span class="logo" aria-hidden="true">
+        <!-- Logo provisoire explicite : deux voisins/maisons reliés par un cœur -->
+        <svg viewBox="0 0 64 64"><path d="M5 29 20 16l15 13v23H8V29Z"/><path d="M29 25 44 12l15 13v27H37V29Z"/><path class="cut" d="M32 32c-4-5-12 0 0 10 12-10 4-15 0-10Z"/><path class="line" d="M14 35v12m7-12v12M44 33v14m7-14v14"/></svg>
+      </span>
+      <span><strong>Prêt’Voisin</strong><small>Les objets circulent,<br>les liens se créent.</small></span>
+    </a>
+    <div class="side-label" data-fr="VOTRE COMMUNAUTÉ" data-en="YOUR COMMUNITY">VOTRE COMMUNAUTÉ</div>
+    <nav id="nav">
+      <button class="nav active" data-page="home"><span>⌂</span><b data-fr="Accueil" data-en="Home">Accueil</b></button>
+      <button class="nav" data-page="borrow"><span>↔</span><b data-fr="À emprunter" data-en="Borrow">À emprunter</b></button>
+      <button class="nav" data-page="donate"><span>♡</span><b data-fr="À donner" data-en="Give away">À donner</b></button>
+      <button class="nav" data-page="loans"><span>↻</span><b data-fr="Mes prêts" data-en="My loans">Mes prêts</b></button>
+      <button class="nav" data-page="my-items"><span>▣</span><b data-fr="Mes annonces" data-en="My listings">Mes annonces</b></button>
+      <button class="nav" data-page="messages"><span>▤</span><b data-fr="Messages" data-en="Messages">Messages</b><i id="msg-badge">2</i></button>
+      <button class="nav" data-page="profile"><span>♙</span><b data-fr="Mon profil" data-en="My profile">Mon profil</b></button>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="language"><button class="lang active" data-lang="fr">FR</button><span>·</span><button class="lang" data-lang="en">EN</button></div>
+      <div class="user"><div class="avatar">SM</div><div><strong>Sophie M.</strong><small data-fr="Membre" data-en="Member">Membre</small></div></div>
+    </div>
+  </aside>
+  <main class="main">
+    <header class="topbar"><div><div class="eyebrow" data-fr="Le partage, tout simplement" data-en="Sharing made simple">Le partage, tout simplement</div><h1 id="page-title">Les objets circulent, les liens se créent.</h1></div><div class="top-actions" id="top-actions"></div></header>
+    <div id="content"></div>
+    <footer><span><b>Prêt’Voisin</b> · <span data-fr="Gratuit, local, solidaire" data-en="Free, local, caring">Gratuit, local, solidaire</span></span><span id="language-indicator">FR</span></footer>
+  </main>
+</div>
+<dialog id="listing-modal" class="modal">
+  <form method="dialog" class="modal-head"><div><div class="eyebrow" data-fr="Nouvelle annonce" data-en="New listing">Nouvelle annonce</div><h2 data-fr="Partager un objet" data-en="Share an item">Partager un objet</h2></div><button class="x">×</button></form>
+  <form id="listing-form" class="form">
+    <label><span data-fr="Type d’annonce" data-en="Listing type">Type d’annonce</span><select id="type"><option value="borrow">À emprunter</option><option value="donate">À donner</option></select></label>
+    <label><span data-fr="Titre" data-en="Title">Titre</span><input id="title" required maxlength="70" placeholder="Ex. Perceuse sans fil"></label>
+    <label><span data-fr="Catégorie" data-en="Category">Catégorie</span><select id="category"><option>Bricolage</option><option>Enfants</option><option>Sport</option><option>Maison</option><option>Alimentation</option><option>Mobilité</option><option>Loisirs</option><option>Autres</option></select></label>
+    <label><span data-fr="Description (visible aux membres)" data-en="Description (members only)">Description (visible aux membres)</span><textarea id="description" required rows="3"></textarea></label>
+    <label><span data-fr="Photo" data-en="Photo">Photo</span><input id="photo" type="file" accept="image/*"></label>
+    <p class="note" data-fr="Prototype uniquement : les annonces ne sont pas publiées en ligne." data-en="Prototype only: listings are not published online.">Prototype uniquement : les annonces ne sont pas publiées en ligne.</p>
+    <button class="btn primary full" type="submit" data-fr="Publier l’annonce" data-en="Publish listing">Publier l’annonce</button>
+  </form>
+</dialog>
+<dialog id="detail-modal" class="modal"><form method="dialog" class="modal-head"><div><div class="eyebrow" data-fr="Fiche objet" data-en="Item details">Fiche objet</div><h2 id="detail-title"></h2></div><button class="x">×</button></form><div id="detail-content"></div></dialog>
+<dialog id="charter-modal" class="modal"><form method="dialog" class="modal-head"><div><div class="eyebrow" data-fr="Charte de prêt" data-en="Loan charter">Charte de prêt</div><h2 data-fr="Charte de prêt à usage" data-en="Loan-for-use charter">Charte de prêt à usage</h2></div><button class="x">×</button></form><div id="charter-content"></div></dialog>
+<dialog id="chat-modal" class="modal"><form method="dialog" class="modal-head"><div><div class="eyebrow" data-fr="Messagerie" data-en="Messages">Messagerie</div><h2 id="chat-title"></h2></div><button class="x">×</button></form><div id="chat-list" class="chat-list"></div><form id="chat-form" class="chat-compose"><input id="chat-input" required placeholder="Écrire un message…"><button class="btn primary">➤</button></form><p class="note" data-fr="Messages de démonstration uniquement, non envoyés à d’autres utilisateurs." data-en="Demo messages only; not sent to other users.">Messages de démonstration uniquement, non envoyés à d’autres utilisateurs.</p></dialog>
+<script src="app.js" defer></script>
+</body></html>
