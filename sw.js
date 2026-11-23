@@ -1,8 +1,8 @@
 // Prêt'Voisin — Service Worker
 // ⚠️ Incrémentez VERSION à chaque déploiement qui modifie les fichiers de l'app.
-const VERSION = 'v8';
+const VERSION = 'v9';
 const CACHE = `pret-voisin-${VERSION}`;
-const ASSETS = ['./', './index.html', './styles.css', './app.js', './manifest.webmanifest', './icons/icon-192.png', './icons/icon-512.png'];
+const ASSETS = ['./', './index.html', './styles.css', './app.js', './manifest.webmanifest', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)).then(() => self.skipWaiting()));
